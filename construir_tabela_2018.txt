@@ -1,0 +1,292 @@
+
+function(){
+  
+  ########### arrays de times ###########
+
+  numero_vitorias_casa = array(0L, dim = 20)
+  numero_vitorias_fora = array(0L, dim = 20)
+  
+  numero_empates_casa = array(0L, dim = 20)
+  numero_empates_fora = array(0L, dim = 20)
+  
+  numero_derrotas_casa = array(0L, dim = 20)
+  numero_derrotas_fora = array(0L, dim = 20)
+
+  gols_pro_casa = array(0L, dim = 20)
+  gols_pro_fora = array(0L, dim = 20)
+  
+  gols_contra_casa = array(0L, dim = 20)
+  gols_contra_fora = array(0L, dim = 20)
+
+  saldo_casa = array(0L, dim = 20)
+  saldo_fora = array(0L, dim = 20)
+
+  pontuacao_casa = array(0L, dim = 20)
+  pontuacao_fora = array(0L, dim = 20)
+
+#########################################
+
+
+########## arrays da tabela #############
+ 
+  resultado_partida = array(0L, dim = 380)
+  
+  
+  numero_vitorias_casa_time1 = array(0L, dim = 380)
+  numero_empates_casa_time1 = array(0L, dim = 380)
+  numero_derrotas_casa_time1 = array(0L, dim = 380)
+
+  numero_vitorias_fora_time1 = array(0L, dim = 380)
+  numero_empates_fora_time1 = array(0L, dim = 380)
+  numero_derrotas_fora_time1 = array(0L, dim = 380)
+
+  numero_vitorias_casa_time2 = array(0L, dim = 380)
+  numero_empates_casa_time2 = array(0L, dim = 380)
+  numero_derrotas_casa_time2 = array(0L, dim = 380)
+
+  numero_vitorias_fora_time2 = array(0L, dim = 380)
+  numero_empates_fora_time2 = array(0L, dim = 380)
+  numero_derrotas_fora_time2 = array(0L, dim = 380)
+
+  numero_vitorias_time1 = array(0L, dim = 380)
+  numero_vitorias_time2 = array(0L, dim = 380)
+  numero_empates_time1 = array(0L, dim = 380)
+  numero_empates_time2 = array(0L, dim = 380)
+  numero_derrotas_time1 = array(0L, dim = 380)
+  numero_derrotas_time2 = array(0L, dim = 380)
+    
+  gols_pro_time1 = array(0L, dim = 380)
+  gols_pro_time2 = array(0L, dim = 380)
+  gols_contra_time1 = array(0L, dim = 380)
+  gols_contra_time2 = array(0L, dim = 380)
+
+  saldo_time1 = array(0L, dim = 380)
+  saldo_time2 = array(0L, dim = 380)
+
+  gols_pro_casa_time1 = array(0L, dim = 380)
+  gols_pro_casa_time2 = array(0L, dim = 380)
+
+  gols_contra_casa_time1 = array(0L, dim = 380)
+  gols_contra_casa_time2 = array(0L, dim = 380)
+
+  saldo_casa_time1 = array(0L, dim = 380)
+  saldo_casa_time2 = array(0L, dim = 380)
+
+  gols_pro_fora_time1 = array(0L, dim = 380)
+  gols_pro_fora_time2 = array(0L, dim = 380)
+
+  gols_contra_fora_time1 = array(0L, dim = 380)
+  gols_contra_fora_time2 = array(0L, dim = 380)
+
+  saldo_fora_time1 = array(0L, dim = 380)
+  saldo_fora_time2 = array(0L, dim = 380)
+
+  pontuacao_casa_time1 = array(0L, dim = 380)
+  pontuacao_casa_time2 = array(0L, dim = 380)
+
+  pontuacao_fora_time1 = array(0L, dim = 380)
+  pontuacao_fora_time2 = array(0L, dim = 380)
+
+  pontuacao_time1 = array(0L, dim = 380)
+  pontuacao_time2 = array(0L, dim = 380)
+  
+  
+  ######################################
+  
+  
+  for(i in 1:50){
+    
+    ###### raspagem dos dados da tabela de jogos #####
+
+    if(i == 28){
+   		placar_lado1 = 0
+    	placar_lado2 = 0
+
+    	id_time1 = instancias2018[i,5]
+	    id_time2 = instancias2018[i,7]
+    }
+
+    else {
+
+    	time_casa <- levels(instancias2018$home_team)[instancias2018[i,5]]
+	    placar <- levels(instancias2018$score)[instancias2018[i,6]]
+	    placar <- unlist(strsplit(placar, " "))
+	    time_fora <- levels(instancias2018$away_team)[instancias2018[i,7]]
+	    
+	    id_time1 = instancias2018[i,5]
+	    id_time2 = instancias2018[i,7]
+	    
+	    placar_lado1 = as.numeric(placar[1])
+	    placar_lado2 = as.numeric(placar[3])
+    }
+
+    # NVC, NEC, NDC time1
+    numero_vitorias_casa_time1[i] = numero_vitorias_casa[id_time1]
+    numero_derrotas_casa_time1[i] = numero_derrotas_casa[id_time1]
+    numero_empates_casa_time1[i] = numero_empates_casa[id_time1]
+
+    # NVC, NEC, NDC time2
+    numero_vitorias_casa_time2[i] = numero_vitorias_casa[id_time2]
+    numero_derrotas_casa_time2[i] = numero_derrotas_casa[id_time2]
+    numero_empates_casa_time2[i] = numero_empates_casa[id_time2]
+
+    # NVF, NEF, NDF time1
+    numero_vitorias_fora_time1[i] = numero_vitorias_fora[id_time1]
+    numero_derrotas_fora_time1[i] = numero_derrotas_fora[id_time1]
+    numero_empates_fora_time1[i] = numero_empates_fora[id_time1]
+
+    # NVF, NEF, NDF time2
+    numero_vitorias_fora_time2[i] = numero_vitorias_fora[id_time2]
+    numero_derrotas_fora_time2[i] = numero_derrotas_fora[id_time2]
+    numero_empates_fora_time2[i] = numero_empates_fora[id_time2]
+
+    # NV, NE, ND time1
+    numero_vitorias_time1[i] = numero_vitorias_casa[id_time1] + numero_vitorias_fora[id_time1]
+    numero_empates_time1[i] = numero_empates_casa[id_time1] + numero_empates_fora[id_time1]
+    numero_derrotas_time1[i] = numero_derrotas_casa[id_time1] + numero_derrotas_fora[id_time1]
+    
+    # NV, NE, ND time2
+    numero_vitorias_time2[i] = numero_vitorias_casa[id_time2] + numero_vitorias_fora[id_time2]
+    numero_empates_time2[i] = numero_empates_casa[id_time2] + numero_empates_fora[id_time2]
+    numero_derrotas_time2[i] = numero_derrotas_casa[id_time2] + numero_derrotas_fora[id_time2]
+
+
+    # GF, GC, SG time1
+    gols_pro_time1[i] = gols_pro_casa[id_time1] + gols_pro_fora[id_time1]
+    gols_contra_time1[i] = gols_contra_casa[id_time1] + gols_contra_fora[id_time1]
+    saldo_time1[i] = saldo_casa[id_time1] + saldo_fora[id_time1]
+    
+    # GF, GC, SG time2
+    gols_pro_time2[i] = gols_pro_casa[id_time2] + gols_pro_fora[id_time2]
+    gols_contra_time2[i] = gols_contra_casa[id_time2] + gols_contra_fora[id_time2]
+    saldo_time2[i] = saldo_fora[id_time2] + saldo_casa[id_time2]
+
+    # GFC, GCC, SGC time1
+    gols_pro_casa_time1[i] = gols_pro_casa[id_time1]
+    gols_contra_casa_time1[i] = gols_contra_casa[id_time1]
+    saldo_casa_time1[i] = saldo_casa[id_time1]
+
+    # GFC, GCC, SGC time2
+    gols_pro_casa_time2[i] = gols_pro_casa[id_time2]
+    gols_contra_casa_time2[i] = gols_contra_casa[id_time2]
+    saldo_casa_time2[i] = saldo_casa[id_time2]
+
+    # GFF, GCF, SGF time1
+    gols_pro_fora_time1[i] = gols_pro_fora[id_time1]
+    gols_contra_fora_time1[i] = gols_contra_fora[id_time1]
+    saldo_fora_time1[i] = saldo_fora[id_time1]
+
+    # GFF, GCF, SGF time1
+    gols_pro_fora_time2[i] = gols_pro_fora[id_time2]
+    gols_contra_fora_time2[i] = gols_contra_fora[id_time2]
+    saldo_fora_time2[i] = saldo_fora[id_time2]
+
+    # PC, PF, P time1
+    pontuacao_casa_time1[i] = pontuacao_casa[id_time1]
+    pontuacao_fora_time1[i] = pontuacao_fora[id_time1]
+    pontuacao_time1[i] = pontuacao_casa[id_time1] + pontuacao_fora[id_time1]
+
+    # PC, PF, P time2
+    pontuacao_casa_time2[i] = pontuacao_casa[id_time2]
+    pontuacao_fora_time2[i] = pontuacao_fora[id_time2]
+    pontuacao_time2[i] = pontuacao_casa[id_time2] + pontuacao_fora[id_time2]
+    
+
+
+    gols_pro_casa[id_time1] = gols_pro_casa[id_time1] + placar_lado1
+    gols_pro_fora[id_time2] = gols_pro_fora[id_time2]  + placar_lado2
+
+    gols_contra_casa[id_time1] = gols_contra_casa[id_time1] + placar_lado2
+    gols_contra_fora[id_time2] = gols_contra_fora[id_time2] + placar_lado1
+
+    saldo_casa[id_time1] = gols_pro_casa[id_time1] - gols_contra_casa[id_time1]
+    saldo_fora[id_time2] =  gols_pro_fora[id_time2] - gols_contra_fora[id_time2]
+    
+    
+    # vitoria time 1, derrota time 2
+
+    if(placar_lado1 > placar_lado2){
+
+      resultado_partida[i] = 2
+
+      pontuacao_casa[id_time1] = pontuacao_casa[id_time1] + 3
+
+      numero_vitorias_casa[id_time1] = numero_vitorias_casa[id_time1] + 1
+      
+      numero_derrotas_fora[id_time2] = numero_derrotas_fora[id_time2] + 1
+      
+    }
+
+    # vitoria time 2, derrota time 1
+
+    if(placar_lado1 < placar_lado2){
+
+      resultado_partida[i] = 0
+
+      pontuacao_fora[id_time2] = pontuacao_fora[id_time2] + 3
+
+      numero_derrotas_casa[id_time1] = numero_derrotas_casa[id_time1] + 1
+      
+      numero_vitorias_fora[id_time2] = numero_vitorias_fora[id_time2] + 1
+      
+
+    }
+
+    # empate
+
+    if(placar_lado1 == placar_lado2) {
+
+      resultado_partida[i] = 1
+
+      pontuacao_casa[id_time1] = pontuacao_casa[id_time1] + 1
+      pontuacao_fora[id_time2] = pontuacao_fora[id_time2] + 1
+
+      numero_empates_casa[id_time1] = numero_empates_casa[id_time1] + 1
+      
+      numero_empates_fora[id_time2] = numero_empates_fora[id_time2] + 1
+      
+    }
+      
+    
+  }
+  
+  tabela_historico <- data.frame(
+                                 Resultado_partida = resultado_partida,
+
+                                 P_time1 = pontuacao_time1,
+                                 P_time2 = pontuacao_time2,
+                                 
+                                 NV_time1 = numero_vitorias_time1,
+                                 NV_time2 = numero_vitorias_time2,
+                                 NE_time1 = numero_empates_time1,
+                                 NE_time2 = numero_empates_time2,
+                                 ND_time1 = numero_derrotas_time1,
+                                 ND_time2 = numero_derrotas_time2,
+
+                                 NVC_time1 = numero_vitorias_casa_time1,
+                                 NEC_time1 = numero_empates_casa_time1,
+                                 NDC_time1 = numero_derrotas_casa_time1,
+
+                                 NVF_time1 = numero_vitorias_fora_time1,
+                                 NEF_time1 = numero_empates_fora_time1,
+                                 NDF_time1 = numero_derrotas_fora_time1,
+
+                                 NVC_time2 = numero_vitorias_casa_time2,
+                                 NEC_time2 = numero_empates_casa_time2,
+                                 NDC_time2 = numero_derrotas_casa_time2,
+                                 
+                                 NVF_time2 = numero_vitorias_fora_time2,
+                                 NEF_time2 = numero_empates_fora_time2,
+                                 NDF_time2 = numero_derrotas_fora_time2,
+                                 
+                                 GF_time1 = gols_pro_time1,
+                                 GF_time2 = gols_pro_time2,
+                                 
+                                 GC_time1 = gols_contra_time1,
+                                 GC_time2 = gols_contra_time2,
+                                 
+                                 SG_time1 =  saldo_time1,
+                                 SG_time2 =  saldo_time2
+  )
+  return(tabela_historico)
+}

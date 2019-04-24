@@ -1,0 +1,50 @@
+library("rpart")
+library("ROCR")
+library("rattle")
+library("rpart.plot")
+library("RColorBrewer")
+
+
+dados2017 = read.csv( file.choose() )
+
+dados2018 = read.csv( file.choose() )
+
+train_index2017 = sample(1:nrow(dados2017), 0.7*nrow(dados2017), replace = FALSE)
+
+train_index2018 = sample(1:50, 50, replace = FALSE)
+
+
+
+train = data.frame()
+dados_teste2017 = data.frame()
+dados_teste2018 = data.frame()
+
+train = dados2017[train_index1,]
+
+dados_teste2017 = dados2017[-train_index2017,]
+dados_teste2018 = dados2018[train_index2018,]
+
+
+
+train_tree = rpart(formula = Resultado_partida ~ NV_time1 + NE_time1 + ND_time1
+                   + NV_time2 + NE_time2 + ND_time2 + NVC_time1 + NEC_time1 + NDC_time1
+                   + NVF_time2 + NEF_time2 + NDF_time2 + GF_time1 + GC_time1 + SG_time1 
+                   + GF_time2 + GC_time2 + SG_time2
+                  , data = train, method = "class")
+
+
+fancyRpartPlot(train_tree)
+
+
+teste2017 = predict(train_tree, dados_teste2017, type="class")
+
+teste2018 = predict(train_tree, dados_teste2018, type="class")
+
+
+confusion_matrix2017 = table(teste2017, dados_teste2017$Resultado_partida)
+
+
+confusion_matrix2018 = table(teste2018, dados_teste2018$Resultado_partida)
+
+
+
